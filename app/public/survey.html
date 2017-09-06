@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+
+  <body> 
+  	<div class="container">
+
+      <div class="jumbotron">
+        <h1>FRIEND FINDER</h1>
+        <p>Find yourself a friend today!</p>
+        <p>
+
+          <div>
+        <a class="btn btn-primary btn-lg" href="/home" role="button">Back To Home!</a>
+      </div>
+          
+
+        </p>
+      </div>
+    </div>
+
+    <div class="panel-heading">
+      <h2 class="panel-title"> SURVEY (1 is the least, 5 is the most)</h2>
+    </div>
+
+    <div class="panel-body">
+      <form role="form">
+        <h3>Name</h3>
+        <input id="name" type="text">
+
+
+        <!-- <div>
+          <h3>Do you love to take long walks on the beach?</h3>
+            <input type="radio" value="1" checked> 1 <br>
+            <input type="radio" value="2" checked> 2 <br>
+            <input type="radio" value="3" checked> 3 <br>
+            <input type="radio" value="4" checked> 4 <br>
+            <input type="radio" value="5" checked> 5 <br>
+        </div>   -->
+
+
+        <h3>Do you love to take long walks on the beach?</h3>
+        <select data-placeholder="" id="Q1">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        
+        <h3>Do you like waking up early or sleeping in?</h3>
+        <select data-placeholder="" id="Q2">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>Do you prefer sweets or salty snacks?</h3>
+        <select data-placeholder="" id="Q3">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>How much do you like the color red?</h3>
+        <select data-placeholder="" id="Q4">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>What number is your favorite of the list?</h3>
+        <select data-placeholder="" id="Q5">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>How many kids do you want?</h3>
+        <select data-placeholder="" id="Q6">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>How much do you like dancing?</h3>
+        <select data-placeholder="" id="Q7">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>How much do you like peanut butter?</h3>
+        <select data-placeholder="" id="Q8">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>Are you a perfectionist?</h3>
+        <select data-placeholder="" id="Q9">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <h3>Do you enjoy frequent social outings.</h3>
+        <select data-placeholder="" id="Q10">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        
+
+        <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+      </form>
+    </div>
+
+
+
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <!-- <span class="close"></span>
+        <p> Some Text</p> -->
+        <div class="modal-header">
+          <h3>CONGRATULATIONS, YOUR NEW BFF IS: </h3>
+        </div>
+        <div class="modal-body">
+          <h3 id="BFF"></h3>
+        </div>
+        <div class="modal-footer">
+          <button type ="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    
+    <script>
+      var data = { name: $("#name").val(),
+        answers:[$("#Q1").val(), $("#Q2").val(),$("#Q3").val(), $("#Q4").val(),$("#Q5").val(), $("#Q6").val(),$("#Q7").val(), $("#Q8").val(),$("#Q9").val(), $("#Q10").val()]}
+
+      $.post(window.location.origin + "/api/friends", data, function(res) {
+        $("#BFF").text(res.name);
+
+        $("#myModal").("toggle");
+      })
+
+    </script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
